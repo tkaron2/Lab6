@@ -102,8 +102,72 @@ public class Colosseum {
      * (Look, we can return objects too!)
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
-        return returnPokemon;
+        int type;
+        final String possibleTypes = "1 - Electric Pokemon\n2 - Fire Pokemon\n3 - Water Pokemon";
+        int pointsRemaining = MAX_HIT_POINTS;
+        String name;
+        int hitPoints;
+        int atkPoints;
+        int defPoints;
+        System.out.println("Select from the following Pokemon types: \n" + possibleTypes);
+        type = myScan.nextInt();
+        while (type != 1 && type != 2 && type != (1 + 2)) {
+            System.out.println("Sorry, you must pick either 1, 2, or 3.");
+            System.out.println("Select from the following Pokemon types: \n" + possibleTypes);
+            type = myScan.nextInt();
+        }
+        System.out.print("Please name your Pokemon: ");
+        name = myScan.next();
+        System.out.print("\n How many hit points will it have? (1-50): ");
+        hitPoints = myScan.nextInt();
+        while (hitPoints < 1 || hitPoints > MAX_HIT_POINTS) {
+            System.out.print("\n  Sorry. Hit points must be between 1 and 50: ");
+            hitPoints = myScan.nextInt();
+        }
+        System.out.print("\n Split fifty points between attack level and defense level.");
+        System.out.print("\n Enter your attack level (1-49): ");
+        atkPoints = myScan.nextInt();
+        pointsRemaining = MAX_HIT_POINTS - atkPoints;
+        while (atkPoints < 1 || atkPoints > (MAX_HIT_POINTS - 1)) {
+            System.out.print("\n  Sorry. The attack level must be between 1 and 49: ");
+            atkPoints = myScan.nextInt();
+            pointsRemaining = MAX_HIT_POINTS - atkPoints;
+        }
+        System.out.print("\n Enter your defense level (1-" + pointsRemaining + "): ");
+        defPoints = myScan.nextInt();
+        while (defPoints < 1 || defPoints > (pointsRemaining)) {
+            System.out.print("\n  Sorry. The defense level must be between 1 and " + pointsRemaining + ": ");
+            defPoints = myScan.nextInt();
+        }
+        if (type == 1) {
+            ElectricPokemon tempPokemon = new ElectricPokemon();
+            tempPokemon.setName(name);
+            tempPokemon.setHitPoints(hitPoints);
+            tempPokemon.setAttackLevel(atkPoints);
+            tempPokemon.setDefenseLevel(defPoints);
+            return tempPokemon;
+        } else if (type == 2) {
+            FirePokemon tempPokemon = new FirePokemon();
+            tempPokemon.setName(name);
+            tempPokemon.setHitPoints(hitPoints);
+            tempPokemon.setAttackLevel(atkPoints);
+            tempPokemon.setDefenseLevel(defPoints);
+            return tempPokemon;
+        } else if (type == (1 + 2)) {
+            WaterPokemon tempPokemon = new WaterPokemon();
+            tempPokemon.setName(name);
+            tempPokemon.setHitPoints(hitPoints);
+            tempPokemon.setAttackLevel(atkPoints);
+            tempPokemon.setDefenseLevel(defPoints);
+            return tempPokemon;
+        } else {
+            Pokemon tempPokemon = new Pokemon();
+            tempPokemon.setName(name);
+            tempPokemon.setHitPoints(hitPoints);
+            tempPokemon.setAttackLevel(atkPoints);
+            tempPokemon.setDefenseLevel(defPoints);
+            return tempPokemon;
+        }
     }
 
     /**
